@@ -16,8 +16,8 @@ def orchestrate(db):
 
 def process_email(email, db):
     try:
-        email_content_path = email_composer.compose_email(email.template_id, email.template_params, email.lang)
-        email_sender.send_email(email.recipient_address, email.subject, email_content_path, email.attachments)
+        email_content_pathes = email_composer.compose_email(email.template_id, email.template_params, email.lang)
+        email_sender.send_email(email.recipient_address, email.subject, email_content_pathes, email.attachments)
     except Exception as e:
         email.processing_result = 1
         email.processing_error = repr(e)
