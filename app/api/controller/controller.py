@@ -21,7 +21,8 @@ def schedule_email(body: SendEmailItem, db):
     if body.attachments is not None:
         for attachment in body.attachments:
             item = EmailAttachmentQueue()
-            item.attachment_path = attachment
+            item.filename = attachment.filename
+            item.filepath = attachment.filepath
             email_queue.attachments.append(item)
     db.add(email_queue)
     db.commit()

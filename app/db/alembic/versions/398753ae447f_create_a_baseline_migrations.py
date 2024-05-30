@@ -1,8 +1,8 @@
 """Create a baseline migrations
 
-Revision ID: 3f9b23a65d36
+Revision ID: 398753ae447f
 Revises: 
-Create Date: 2024-05-30 14:19:12.314323
+Create Date: 2024-05-30 15:35:29.905926
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import mysql
 
 # revision identifiers, used by Alembic.
-revision: str = '3f9b23a65d36'
+revision: str = '398753ae447f'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -36,7 +36,8 @@ def upgrade() -> None:
     op.create_table('email_attachment_queue',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email_queue_id', sa.Integer(), nullable=False),
-    sa.Column('attachment_path', sa.VARCHAR(length=1024), nullable=True),
+    sa.Column('filename', sa.VARCHAR(length=1024), nullable=True),
+    sa.Column('filepath', sa.VARCHAR(length=1024), nullable=True),
     sa.ForeignKeyConstraint(['email_queue_id'], ['email_queue.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

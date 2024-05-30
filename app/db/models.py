@@ -30,4 +30,5 @@ class EmailAttachmentQueue(Base):
 
     id = Column(Integer, primary_key=True)
     email_queue_id = Column(ForeignKey('email_queue.id'), nullable=False, index=True)
-    attachment_path = Column(VARCHAR(1024))
+    filename = Column(VARCHAR(1024))
+    filepath = Column(VARCHAR(1024))
