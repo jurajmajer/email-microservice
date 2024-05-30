@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, VARCHAR, JSON, ForeignKey, DateTime, text
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.mysql import TEXT
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()
@@ -13,7 +13,7 @@ class EmailQueue(Base):
     id = Column(Integer, primary_key=True)
     recipient_address = Column(VARCHAR(256), nullable=False)
     template_id = Column(VARCHAR(256), nullable=False)
-    template_params = Column(TEXT)
+    template_params = Column(JSON)
     lang = Column(VARCHAR(5))
     created_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP'))
     processed_at = Column(DateTime)
