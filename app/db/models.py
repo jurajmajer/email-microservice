@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, VARCHAR, JSON, ForeignKey, DateTime, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.mysql import TEXT
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 metadata = Base.metadata
@@ -11,13 +12,16 @@ class EmailQueue(Base):
 
     id = Column(Integer, primary_key=True)
     recipient_address = Column(VARCHAR(256), nullable=False)
-    email_template_id = Column(VARCHAR(256), nullable=False)
-    email_template_params = Column(JSON)
-    email_lang = Column(VARCHAR(5))
+    template_id = Column(VARCHAR(256), nullable=False)
+    template_params = Column(TEXT)
+    lang = Column(VARCHAR(5))
     created_at = Column(DateTime, server_default=text('CURRENT_TIMESTAMP'))
     processed_at = Column(DateTime)
     processing_result = Column(Integer)
     processing_error = Column(TEXT)
+
+    attachments = relationship('EmailAttachmentQueue', primaryjoin='EmailQueue.id == '
+                                                                   'EmailAttachmentQueue.email_queue_id')
 
 
 class EmailAttachmentQueue(Base):
@@ -25,4 +29,4 @@ class EmailAttachmentQueue(Base):
 
     id = Column(Integer, primary_key=True)
     email_queue_id = Column(ForeignKey('email_queue.id'), nullable=False, index=True)
-    email_attachment_path = Column(VARCHAR(1024))
+    attachment_path = Column(VARCHAR(1024))
