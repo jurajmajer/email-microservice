@@ -2,8 +2,9 @@ from fastapi import FastAPI, Response, Depends
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_204_NO_CONTENT
 
-import app.api.controller.controller as controller
+from app.api.controller import controller
 from app.api.controller.schemas import SendMessageItem
+from app.bl import orchestrator
 
 app = FastAPI(
     title='Email Microservice API',
@@ -25,4 +26,5 @@ def send_message(
         db: Session = Depends(controller.get_db),
 ) -> Response:
     controller.schedule_email(body, db)
+    orchestrator.orchestrate(db)
     return Response(status_code=HTTP_204_NO_CONTENT)
