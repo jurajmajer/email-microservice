@@ -8,14 +8,16 @@ GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, LO
 
 # Contribution / Development
 ## Generate requirements.txt (Powershell)
+Navigate in Powershell to the root folder of project, e.g. `C:\projects\email-microservice` and execute:
 ```Powershell
-PS C:\projects\email-microservice> .\script\create-pip-requirements.ps1
+.\script\create-pip-requirements.ps1
 ```
 
 ## Generate and apply Alembic migration (Powershell)
+Navigate in Powershell to `db` folder of project, e.g. `C:\projects\email-microservice\app\db` and execute:
 ```Powershell
-PS C:\projects\email-microservice\app\db> $env:PYTHONPATH = 'C:/projects/email-microservice/'
-PS C:\projects\email-microservice\app\db> $env:DB_URI = 'mysql://email-microservice:<password>@localhost/email-microservice'
-PS C:\projects\email-microservice\app\db> alembic revision --autogenerate -m "<custom message>"
-PS C:\projects\email-microservice\app\db> alembic upgrade head
+$env:PYTHONPATH = 'C:/projects/email-microservice/'
+$env:DB_URI = 'mysql://email-microservice:<password>@localhost/email-microservice'
+alembic revision --autogenerate -m "<custom message>"
+alembic upgrade head
 ```
