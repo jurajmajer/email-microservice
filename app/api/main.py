@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from starlette.status import HTTP_204_NO_CONTENT
 
 from app.api.controller import controller
-from app.api.controller.schemas import SendMessageItem
+from app.api.controller.schemas import SendEmailItem
 from app.bl import orchestrator
 
 app = FastAPI(
@@ -22,9 +22,9 @@ app = FastAPI(
                      '500': {'description': 'Internal server error'}},
           tags=['Email Sending'])
 def send_message(
-        body: SendMessageItem,
+        body: SendEmailItem,
         db: Session = Depends(controller.get_db),
 ) -> Response:
     controller.schedule_email(body, db)
-    orchestrator.orchestrate(db)
+    orchestrator.orchestrate(db)  # TODO: Execute this asynchronously
     return Response(status_code=HTTP_204_NO_CONTENT)

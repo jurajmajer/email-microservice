@@ -3,8 +3,9 @@ from typing import List
 from pydantic import BaseModel
 
 
-class SendMessageItem(BaseModel):
+class SendEmailItem(BaseModel):
     recipientAddress: str
+    subject: str
     templateId: str
     templateParams: object | None = None
     lang: str | None = 'en'

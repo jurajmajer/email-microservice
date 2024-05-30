@@ -7,18 +7,15 @@ from pathlib import Path
 
 from jinja2 import Template
 
+from app.bl import util
+
 log = logging.getLogger()
-template_root = os.getenv('TEMPLATE_ROOT')
-email_content_root = os.getenv('EMAIL_CONTENT_ROOT')
-if template_root is None:
-    log.error('Environment variable TEMPLATE_ROOT is not set')
-if email_content_root is None:
-    log.error('Environment variable EMAIL_CONTENT_ROOT is not set')
+template_root = util.read_env_var('TEMPLATE_ROOT')
+email_content_root = util.read_env_var('EMAIL_CONTENT_ROOT')
 
 
 def compose_email(template_id, template_params, lang):
     template_path = get_template_path(template_id, lang)
-    email_content = None
     with open(template_path) as f:
         template = Template(f.read())
         if template_params is not None:

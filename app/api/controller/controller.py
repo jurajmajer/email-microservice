@@ -1,4 +1,4 @@
-from app.api.controller.schemas import SendMessageItem
+from app.api.controller.schemas import SendEmailItem
 from app.db.database import SessionLocal
 from app.db.models import EmailQueue, EmailAttachmentQueue
 
@@ -11,9 +11,10 @@ def get_db():
         db.close()
 
 
-def schedule_email(body: SendMessageItem, db):
+def schedule_email(body: SendEmailItem, db):
     email_queue = EmailQueue()
     email_queue.recipient_address = body.recipientAddress
+    email_queue.subject = body.subject
     email_queue.template_id = body.templateId
     email_queue.template_params = body.templateParams
     email_queue.lang = body.lang

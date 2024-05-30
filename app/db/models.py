@@ -12,6 +12,7 @@ class EmailQueue(Base):
 
     id = Column(Integer, primary_key=True)
     recipient_address = Column(VARCHAR(256), nullable=False)
+    subject = Column(VARCHAR(256), nullable=False)
     template_id = Column(VARCHAR(256), nullable=False)
     template_params = Column(JSON)
     lang = Column(VARCHAR(5))
