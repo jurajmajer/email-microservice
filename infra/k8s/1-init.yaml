@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: email-microservice
+  labels:
+    name: email-microservice
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sender-address
+  namespace: email-microservice
+type: kubernetes.io/basic-auth
+stringData:
+  password: <define-this>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: smtp-username
+  namespace: email-microservice
+type: kubernetes.io/basic-auth
+stringData:
+  password: <define-this>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: smtp-password
+  namespace: email-microservice
+type: kubernetes.io/basic-auth
+stringData:
+  password: <define-this>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: smtp-server
+  namespace: email-microservice
+type: kubernetes.io/basic-auth
+stringData:
+  password: <define-this>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-uri
+  namespace: email-microservice
+type: kubernetes.io/basic-auth
+stringData:
+  password: <define-this>

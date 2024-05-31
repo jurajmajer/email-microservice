@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-microservice-service
+  namespace: email-microservice
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: email-microservice-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-microservice-deployment
+  namespace: email-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email-microservice-service
+  template:
+    metadata:
+      labels:
+        app: email-microservice-service
+    spec:
+      containers:
+        - name: email-microservice-container
+          image: ghcr.io/jurajmajer/email-microservice/email-microservice:0.01
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TEMPLATE_ROOT
+              value: '/app-data/template'
+            - name: EMAIL_CONTENT_ROOT
+              value: '/app-data/email-content'
+            - name: ATTACHMENT_ROOT
+              value: '/app-data/attachment'
+            - name: SENDER_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: sender-address
+                  key: password
+            - name: SMTP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-username
+                  key: password
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-password
+                  key: password
+            - name: SMTP_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-server
+                  key: password
+            - name: DB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: db-uri
+                  key: password
+          volumeMounts:
+            - name: persistent-storage
+              mountPath: /app-data
+      volumes:
+        - name: persistent-storage
+          persistentVolumeClaim:
+            claimName: pv-claim
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
