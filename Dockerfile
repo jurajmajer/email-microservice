@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./app /code/app
 ENV PYTHONPATH=/code/app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--proxy-headers"]
+CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8080", "--proxy-headers"]
