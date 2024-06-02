@@ -9,7 +9,7 @@ from app.bl import orchestrator
 app = FastAPI(
     title='Email Microservice API',
     description='Email Microservice API',
-    version='1.0.0',
+    version='0.0.1',
     servers=[
         {'url': 'http://localhost:8000', 'description': 'Development server'},
     ],
