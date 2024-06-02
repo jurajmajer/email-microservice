@@ -53,7 +53,7 @@ TEMPLATE_ROOT
 Under TEMPLATE_ROOT there is a set of folders named by languages (`en`, `de` etc.). In every language folder there are folders named by template IDs. In every template ID folder there can be one file for html email content named exactly `html.jinja2` and one file for plain text email content named exactly `plain.jinja2`. It is not required to have both `plain.jinja2` and `html.jinja2`. If e.g. `plain.jinja2` is omitted, it will simply not be included in the email.
 
 # Usage
-Other pods should use OpenAPI interface of email-microservice for sending emails. OpenAPI interface does not require any authentication. It is assumed email-microservice is accessible only within the cluster. Swagger documentation is available after installation under [http://\<email-microservice\>/docs](http://email-microservice/docs)
+Other pods should use OpenAPI interface of email-microservice for sending emails. OpenAPI interface does not require any authentication. It is assumed email-microservice is accessible only within the cluster. Swagger documentation is available after installation under [http://\<email-microservice\>/docs](http://email-microservice/docs). Alternatively, you can check out the swagger UI [here](https://jurajmajer.github.io/email-microservice/openapi/).
 
 # Spam Troubleshooting
 This project (email-microservice) has no effect on whether sent email ends up in the spam folder or not. You need to troubleshoot your SMTP server settings to avoid spam folder. Here are some tips what you can do:
