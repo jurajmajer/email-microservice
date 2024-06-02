@@ -19,7 +19,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint
+      - name: Set pythonpath
+        run: |
+          echo "-----pwd-----"
+          pwd
+          
+          PWD=$(pwd)
+          export PYTHONPATH=$PWD/app:$PYTHONPATH
+          echo "PYTHONPATH=$PYTHONPATH" >> $GITHUB_ENV
       - name: Analysing the code with pylint
         run: |
-          export PYTHONPATH=/app
           pylint $(git ls-files '*.py')
