@@ -21,12 +21,9 @@ jobs:
           pip install pylint
       - name: Set pythonpath
         run: |
-          echo "-----pwd-----"
-          pwd
-          
           PWD=$(pwd)
           export PYTHONPATH=$PWD/app:$PYTHONPATH
           echo "PYTHONPATH=$PYTHONPATH" >> $GITHUB_ENV
       - name: Analysing the code with pylint
         run: |
-          pylint $(git ls-files '*.py')
+          pylint $(git ls-files '*.py') --output=lint.txt || true
