@@ -46,7 +46,8 @@ def send_email(recipient_address, subject, email_content_pathes, attachments):
 
 def handle_attachment(message, attachment):
     if attachment_root is None:
-        raise Exception('Cannot send email with attachments because environment variable ATTACHMENT_ROOT is not set')
+        raise Exception('Cannot send email with attachments because '
+                        'environment variable ATTACHMENT_ROOT is not set')
     with open(os.path.join(attachment_root, attachment.filepath), "rb") as f:
         part = MIMEBase("application", "octet-stream")
         part.set_payload(f.read())

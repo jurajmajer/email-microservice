@@ -20,12 +20,14 @@ def compose_email(template_id, template_params, lang):
     Path(os.path.dirname(output_filename)).mkdir(parents=True, exist_ok=True)
     ret_val = [None, None]
 
-    plain_content = transform_template(os.path.join(template_folder, 'plain.jinja2'), template_params)
+    plain_content = transform_template(os.path.join(template_folder, 'plain.jinja2'),
+                                       template_params)
     if plain_content is not None:
         ret_val[0] = output_filename + '.plain'
         with open(ret_val[0], 'w', encoding='utf-8') as f:
             f.write(plain_content)
-    html_content = transform_template(os.path.join(template_folder, 'html.jinja2'), template_params)
+    html_content = transform_template(os.path.join(template_folder, 'html.jinja2'),
+                                      template_params)
     if html_content is not None:
         ret_val[1] = output_filename + '.html'
         with open(ret_val[1], 'w', encoding='utf-8') as f:
@@ -49,6 +51,7 @@ def get_template_folder(template_id, lang):
 
 
 def get_output_filename(template_id, lang):
-    filename = datetime.now().strftime('%Y%m%d-%H%M%S%f') + '-' + ''.join(random.choices(string.ascii_uppercase +
-                                                                                         string.digits, k=6))
+    filename = datetime.now().strftime('%Y%m%d-%H%M%S%f') + \
+               '-' + ''.join(random.choices(string.ascii_uppercase +
+                                            string.digits, k=6))
     return os.path.join(email_content_root, lang, template_id, filename)

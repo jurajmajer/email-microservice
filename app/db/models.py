@@ -21,8 +21,8 @@ class EmailQueue(Base):
     processing_result = Column(Integer)
     processing_error = Column(TEXT)
 
-    attachments = relationship('EmailAttachmentQueue', primaryjoin='EmailQueue.id == '
-                                                                   'EmailAttachmentQueue.email_queue_id')
+    attachments = relationship('EmailAttachmentQueue',
+                               primaryjoin='EmailQueue.id == EmailAttachmentQueue.email_queue_id')
 
 
 class EmailAttachmentQueue(Base):
