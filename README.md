@@ -1,5 +1,6 @@
 # Email Microservice
 [![Build Docker Image](https://github.com/jurajmajer/email-microservice/actions/workflows/build-docker-image.yml/badge.svg)](https://github.com/jurajmajer/email-microservice/actions/workflows/build-docker-image.yml)
+![pylint Score](https://mperlet.github.io/pybadge/badges/9.74.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jurajmajer/email-microservice/blob/main/LICENSE)
 
 ## Installation on Kubernetes
