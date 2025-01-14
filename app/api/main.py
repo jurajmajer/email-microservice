@@ -1,3 +1,7 @@
+import logging
+import os
+
+import yaml
 from fastapi import FastAPI, Response, Depends, BackgroundTasks
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_204_NO_CONTENT
@@ -14,6 +18,15 @@ app = FastAPI(
         {'url': 'http://localhost:8000', 'description': 'Development server'},
     ],
 )
+
+# Configure logging
+log_config_file = 'app/log_conf.yaml'
+if os.path.isfile(log_config_file):
+    with open(log_config_file, 'rt') as f:
+        config = yaml.safe_load(f.read())
+        logging.config.dictConfig(config)
+logger = logging.getLogger(__name__)
+logger.info('Starting API...')
 
 
 @app.post('/sendEmail',

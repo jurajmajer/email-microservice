@@ -5,7 +5,7 @@ import app.bl.email.smtp_email_sender as email_sender
 from app.bl.email import email_composer
 from app.db.models import EmailQueue
 
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 
 
 def orchestrate(db):

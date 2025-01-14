@@ -9,7 +9,7 @@ from jinja2 import Template
 
 from app.bl import util
 
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 template_root = util.read_env_var('TEMPLATE_ROOT')
 email_content_root = util.read_env_var('EMAIL_CONTENT_ROOT')
 

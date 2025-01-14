@@ -1,7 +1,7 @@
 import logging
 import os
 
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 
 
 def read_env_var(env_name, log_error=True, default_value=None):
