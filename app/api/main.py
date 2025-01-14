@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Response, Depends
+from fastapi import FastAPI, Response, Depends, BackgroundTasks
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_204_NO_CONTENT
 
@@ -23,8 +23,9 @@ app = FastAPI(
           tags=['Email Sending'])
 def send_message(
         body: SendEmailItem,
+        background_tasks: BackgroundTasks,
         db: Session = Depends(controller.get_db),
 ) -> Response:
     controller.schedule_email(body, db)
-    orchestrator.orchestrate(db)  # TODO: Execute this asynchronously
+    background_tasks.add_task(orchestrator.orchestrate, db)
     return Response(status_code=HTTP_204_NO_CONTENT)
