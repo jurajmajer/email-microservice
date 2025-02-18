@@ -28,22 +28,19 @@ spec:
     spec:
       containers:
         - name: email-microservice-container
-          image: ghcr.io/jurajmajer/email-microservice/email-microservice:0.01
+          image: ghcr.io/jurajmajer/email-microservice/email-microservice:0.03
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
             - name: TEMPLATE_ROOT
-              value: '/app-data/template'
+              value: '/app-data/email/template'
             - name: EMAIL_CONTENT_ROOT
-              value: '/app-data/email-content'
+              value: '/app-data/email/email-content'
             - name: ATTACHMENT_ROOT
-              value: '/app-data/attachment'
+              value: '/app-data/email/attachment'
             - name: SENDER_ADDRESS
-              valueFrom:
-                secretKeyRef:
-                  name: sender-address
-                  key: password
+              value: 'to-be-defined'
             - name: SMTP_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -55,10 +52,7 @@ spec:
                   name: smtp-password
                   key: password
             - name: SMTP_SERVER
-              valueFrom:
-                secretKeyRef:
-                  name: smtp-server
-                  key: password
+              value: 'to-be-defined'
             - name: DB_URI
               valueFrom:
                 secretKeyRef:

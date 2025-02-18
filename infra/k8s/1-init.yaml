@@ -8,18 +8,9 @@ metadata:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: sender-address
-  namespace: email-microservice
-type: kubernetes.io/basic-auth
-stringData:
-  password: <define-this>
----
-apiVersion: v1
-kind: Secret
-metadata:
   name: smtp-username
   namespace: email-microservice
-type: kubernetes.io/basic-auth
+type: Opaque
 stringData:
   password: <define-this>
 ---
@@ -28,16 +19,7 @@ kind: Secret
 metadata:
   name: smtp-password
   namespace: email-microservice
-type: kubernetes.io/basic-auth
-stringData:
-  password: <define-this>
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: smtp-server
-  namespace: email-microservice
-type: kubernetes.io/basic-auth
+type: Opaque
 stringData:
   password: <define-this>
 ---
