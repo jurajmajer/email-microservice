@@ -11,12 +11,12 @@ handlers:
   default:
     formatter: default
     class: logging.FileHandler
-    filename: /app-data/log/email-microservice.log
+    filename: /app-data/email/log/email-microservice.log
     mode: a
   access:
     formatter: access
     class: logging.FileHandler
-    filename: /app-data/log/email-microservice.log
+    filename: /app-data/email/log/email-microservice.log
     mode: a
 loggers:
   uvicorn.error:
