@@ -16,7 +16,7 @@ smtp_port = util.read_env_var('SMTP_PORT', False, 465)
 attachment_root = util.read_env_var('ATTACHMENT_ROOT', False)
 
 
-# https://bugs.python.org/issue12552
+# https://bugs.python.org/issue12552, _charset='UTF-8' implies Content-Transfer-Encoding: BASE64
 # charset.add_charset('utf-8', charset.SHORTEST, charset.QP)
 
 
