@@ -1,7 +1,7 @@
 import os
 import smtplib
 import ssl
-from email import encoders, charset
+from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -14,7 +14,10 @@ password = util.read_env_var('SMTP_PASSWORD')
 smtp_server = util.read_env_var('SMTP_SERVER')
 smtp_port = util.read_env_var('SMTP_PORT', False, 465)
 attachment_root = util.read_env_var('ATTACHMENT_ROOT', False)
-charset.add_charset('utf-8', charset.SHORTEST, charset.QP)
+
+
+# https://bugs.python.org/issue12552
+# charset.add_charset('utf-8', charset.SHORTEST, charset.QP)
 
 
 def send_email(recipient_address, subject, email_content_pathes, attachments):
