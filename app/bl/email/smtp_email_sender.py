@@ -5,10 +5,12 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.utils import formataddr
 
 from app.bl import util
 
 sender_address = util.read_env_var('SENDER_ADDRESS')
+sender_name = util.read_env_var('SENDER_NAME', False)
 username = util.read_env_var('SMTP_USERNAME')
 password = util.read_env_var('SMTP_PASSWORD')
 smtp_server = util.read_env_var('SMTP_SERVER')
@@ -23,7 +25,10 @@ attachment_root = util.read_env_var('ATTACHMENT_ROOT', False)
 def send_email(recipient_address, subject, email_content_pathes, attachments):
     message = MIMEMultipart("alternative")
     message["Subject"] = subject
-    message["From"] = sender_address
+    if sender_name is not None:
+        message["From"] = formataddr((sender_name, sender_address))
+    else:
+        message["From"] = sender_address
     message["To"] = recipient_address
 
     if email_content_pathes[0] is not None:

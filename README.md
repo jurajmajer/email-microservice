@@ -25,6 +25,7 @@ kubectl apply -f infra/k8s/3-deployment.yaml
 * `EMAIL_CONTENT_ROOT` - folder where email-microservice will store output of jinja template transformation. It is the email message body. No default value, must be set.
 * `ATTACHMENT_ROOT` - folder where email attachments are stored. No default value, must be set when using attachments.
 * `SENDER_ADDRESS` - FROM address of emails. No default value, must be set.
+* `SENDER_NAME` - FROM name of emails. No default value, optional.
 * `SMTP_USERNAME` - username for login to SMTP server. No default value, must be set.
 * `SMTP_PASSWORD` - password for login to SMTP server. No default value, must be set.
 * `SMTP_SERVER` - URL of SMTP server. No default value, must be set.
